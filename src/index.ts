@@ -15,7 +15,7 @@ app.get('/stats', async (request, reply) => {
 client.login(process.env.TOKEN)
   .then(() => {
     console.log('Discord bot logged in as', client.user.username)
-    return app.listen(port)
+    return app.listen(port, '0.0.0.0')
   })
   .then(() => {
     console.log('Listening on port', port)
