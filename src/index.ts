@@ -3,6 +3,7 @@ import { Client } from 'discord.js'
 
 const app = fastify()
 const client = new Client()
+const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 80
 
 app.get('/stats', async (request, reply) => {
   return {
@@ -13,7 +14,11 @@ app.get('/stats', async (request, reply) => {
 
 client.login(process.env.TOKEN)
   .then(() => {
-    return app.listen(process.env.PORT ? parseInt(process.env.PORT, 10) : 80)
+    console.log('Discord bot logged in as', client.user.username)
+    return app.listen(port)
+  })
+  .then(() => {
+    console.log('Listening on port', port)
   })
   .catch(err => {
     console.error(err)
